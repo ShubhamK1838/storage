@@ -55,7 +55,7 @@ public class StorageServiceImpl implements StorageService {
 
     @Override
     public boolean saveFileData(StorageFile file) {
-        return saveFileByMultipart(file.getMultipartFile(), file ); 
+        return saveFileByMultipart(file.getMultipartFile(), file );
     }
 
     @Override
@@ -113,7 +113,7 @@ public class StorageServiceImpl implements StorageService {
 
     public File getUserDir(StorageFile storageFile) {
         try {
-            File file = new File(path + File.separator + storageFile.getUserId());
+            File file = new File(path + File.separator + storageFile.getUserid());
             if (!file.exists()) {
                 boolean result = file.mkdirs();
                 if (!result) {

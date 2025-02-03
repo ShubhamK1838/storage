@@ -1,6 +1,7 @@
 package com.newgen.storage.controller;
 
 import com.newgen.storage.entity.StorageFile;
+import com.newgen.storage.service.StorageFileService;
 import com.newgen.storage.service.StorageService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,20 +16,20 @@ import java.util.UUID;
 @RequestMapping("/storage")
 public class StorageController {
 
-    private final StorageService storageService;
+    private final StorageFileService storageService;
 
-    public StorageController(StorageService storageService) {
+    public StorageController(StorageFileService storageService) {
         this.storageService = storageService;
     }
 
     @PostMapping
-    public StorageFile saveFile(@RequestParam MultipartFile file, String userId) throws  Exception {
+    public String saveFile(@RequestParam MultipartFile file, String userId) throws  Exception {
         StorageFile storageFile = new StorageFile();
         storageFile.setMultipartFile(file);
-        storageFile.setUserId(userId);
+        storageFile.setUserid(userId);
         storageFile.setId(UUID.randomUUID().toString());
 
-        return storageService.saveFileData(storageFile, file.getInputStream()) ? storageFile : null;
+        return storageService.saveStorageFile(storageFile) ? " file is Added " : null;
 
 
     }

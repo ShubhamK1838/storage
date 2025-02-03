@@ -1,10 +1,7 @@
 package com.newgen.storage.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.CollectionTable;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -29,6 +26,7 @@ public class StorageFile {
     @Column(name="fileType")
     private String fileType;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @Transient
     private MultipartFile multipartFile;
 
     public StorageFile() {
