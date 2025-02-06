@@ -19,26 +19,27 @@ public class StorageFile {
     private String id;
     private String name;
     private String size;
-    @Column(name="user-date")
+    @Column(name = "saved_date")
     private Date savedDate;
-    @Column(name="userid")
+    @Column(name = "userid")
     private String userid;
-    @Column(name="fileType")
+    @Column(name = "file_type")
     private String fileType;
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Transient
-    private MultipartFile multipartFile;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+   transient private MultipartFile file;
+    public boolean visible;
 
     public StorageFile() {
 
     }
 
-    public void setMultipartFile(MultipartFile multipartFile) {
+    public void setFile(MultipartFile file) {
         setSavedDate(new Date());
-        setName(multipartFile.getOriginalFilename());
-        var ctype = multipartFile.getContentType();
+        setName(file.getOriginalFilename());
+        var ctype = file.getContentType();
         setFileType(ctype.substring(ctype.indexOf("/") + 1, ctype.length()));
-        setSize(String.valueOf(multipartFile.getSize()));
-        this.multipartFile = multipartFile;
+        setSize(String.valueOf(file.getSize()));
+        this.file = file;
     }
 }

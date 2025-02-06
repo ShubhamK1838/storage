@@ -37,7 +37,7 @@ public class StorageFileServiceImpl implements StorageFileService {
         Optional<StorageFile> storageFileOptional = getStorageFileById(id);
         if (storageFileOptional.isPresent()) {
             var file = storageFileOptional.get();
-            if (storageService.deleteFile(file)) ;
+            if(storageService.deleteFile(file)) ;
             {
                 storageRepo.deleteById(file.getId());
                 return true;
@@ -72,5 +72,10 @@ public class StorageFileServiceImpl implements StorageFileService {
     @Override
     public List<StorageFile> getAllFleByUserId(String id) {
         return storageRepo.findByUserid(id);
+    }
+
+    @Override
+    public List<StorageFile> getAllPublicFile() {
+        return storageRepo.findByVisible(true); 
     }
 }

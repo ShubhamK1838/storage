@@ -55,7 +55,7 @@ public class StorageServiceImpl implements StorageService {
 
     @Override
     public boolean saveFileData(StorageFile file) {
-        return saveFileByMultipart(file.getMultipartFile(), file );
+        return saveFileByMultipart(file.getFile(), file);
     }
 
     @Override
@@ -93,6 +93,17 @@ public class StorageServiceImpl implements StorageService {
             log.error(error.getMessage());
         }
         return false;
+    }
+
+    @Override
+    public byte[] getFileData(StorageFile file) {
+        try (InputStream ios = getInputStream(file)) {
+
+            return ios.readAllBytes();
+        } catch (Exception error) {
+            log.error(error.getMessage());
+        }
+        return null;
     }
 
     private File getUserFile(StorageFile storageFile) {

@@ -19,6 +19,7 @@ public interface StorageFileService {
     Optional<StorageFile> getStorageFileById(String id);
 
     List<StorageFile> getAllFleByUserId(String id);
+    List<StorageFile> getAllPublicFile(); 
 
 
 }

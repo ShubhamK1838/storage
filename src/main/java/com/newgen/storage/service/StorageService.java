@@ -12,6 +12,6 @@ public interface StorageService {
     boolean deleteFile(StorageFile file );
     InputStream getInputStream(StorageFile file );
     boolean saveFileByMultipart(MultipartFile part ,  StorageFile file );
-
+    byte[] getFileData(StorageFile file );
 
 }
